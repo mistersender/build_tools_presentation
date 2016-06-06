@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Build Tools Hands-On presentation</title>
+
+		<meta name="author" content="Jessica Kennedy">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/simple.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+				  <h1>Intro to Build Tools</h1>
+          <h4>with Jessica Kennedy</h4>
+          <p><small>@mistersender</small></p>
+				</section>
+
+
+				<section class='c-grid'>
+          <div>
+            <figure class="c-me" style="background-image: url(images/me.jpg)">
+              Me, Jessica Kennedy!
+            </figure>
+          </div>
+          <div style = 'flex: calc(100% - 300px)'>
+  					<h2>Who am I?</h2>
+  					<ul>
+  						<li>Senior Software Engineer</li>
+  						<li>10 Years + Development</li>
+  						<li>3 Years converting Desktop to Mobile</li>
+  					</ul>
+          </div>
+				</section>
+
+        <section>
+          <h1>What are Build Tools?</h1>
+        </section>
+
+        <section>
+          <blockquote>Build tools are programs that automate the creation of executable applications from source code. Building incorporates compiling, linking and packaging the code into a usable or executable form.</blockquote>
+        </section>
+
+        <section>
+          <img src="images/cross_eyed.jpg" alt="Oh No, I've gone cross eyed">
+        </section>
+
+        <section class="all-the-things">
+          <h3>In English:</h3>
+          <blockquote>Build tools do all the things you don't like to do to make your code glorious!</blockquote>
+        </section>
+
+        <section>
+          <h1>Like what?</h1>
+          <aside class="notes">
+            ask if anyone can name things they hate doing
+          </aside>
+        </section>
+
+        <section>
+          <h3>Auto-prefix your css</h3>
+          <div class="c-grid">
+            <div>
+              <h4>Write this:</h4>
+              <pre><code>
+.c-test {
+  display: flex;
+}
+              </code></pre>
+            </div>
+            <div>
+              <h4>Not this:</h4>
+              <pre><code>
+.c-test{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex
+}
+              </code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Minify Code</h3>
+          <p>Write css, js, html, (even images) as normal, build will minify for you</p>
+        </section>
+
+        <section>
+          <h3>Combine Code</h3>
+          <p>Combine all the 3rd party libraries with your own code into 1 file</p>
+        </section>
+
+        <section>
+          <h3>Generate/inject Code</h3>
+          <ul>
+            <li>Config files</li>
+            <li>Custom icon libraries</li>
+            <li>Custom Replacements</li>
+            <li>Anything!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Develop Faster</h3>
+          <ul>
+            <li>Watch for changes</li>
+            <li>Update server automatically</li>
+            <li>Even test many devices automatically!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Testing</h3>
+          <ul>
+            <li>Unit Tests, TDD on each save</li>
+            <li>Linting</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Popular Build Tools</h2>
+          <img src="images/gulp_grunt_fly.png" alt="Gulp, Grunt, Fly">
+        </section>
+
+<!-- Get started (hands on!) -->
+        <section>
+          <h1>Let's Get Started!</h1>
+          <h4>Using Gulp</h4>
+        </section>
+
+        <section>
+          <h2>1. Install <code class='il'>node.js</code></h2>
+          <p>(use your google machine) or</p>
+          <p><a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></p>
+          <aside class="notes">
+            <p>What are we installing?</p>
+            <p>node - the language</p>
+            <p>npm - the package manager (which is also a package)</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Using <code class="il">console</code></h3>
+          <p>Open <code class='il'>terminal</code> or <code class='il'>command prompt</code></p>
+        </section>
+
+        <section>
+          <h3>Prepare for the Crashiest of crash courses in <code class="il">console</code>:</h3>
+        </section>
+
+        <section>
+          <h2><code class="il">$</code></h2>
+          <p>Tells users the command is entered in the <code class="il">console</code>.</p>
+          <p>eg: <code class="il">$ cd Users/kennedy</code></p>
+          <h3>DO NOT ENTER THE <code class="il">$</code>!</h3>
+        </section>
+
+        <section>
+          <h2><code class="il">ls</code></h2>
+          <p>list the things in the current folder</p>
+        </section>
+
+        <section>
+          <h2><code class="il">cd</code></h2>
+          <p>go in to a folder eg, <code class="il">$ cd Users/kennedy/</code></p>
+        </section>
+
+        <section>
+          <h2><code class="il">-(something)</code></h2>
+          <p>a command for a program</p>
+          <p>eg: <code class="il">$ node -v</code> = "get the version of node"</p>
+        </section>
+
+        <section>
+          <h2><code class="il">--(something)</code></h2>
+          <p>a variable passed to a program</p>
+          <p>eg: <code class="il">$ program --is-fancy</code> passes is-fancy (boolean) to the program</p>
+        </section>
+
+        <section>
+          <h2><code class="il">ctrl + c</code></h2>
+          <p>breaks out of a program</p>
+        </section>
+
+        <section>
+          <h1>Now back to node...</h1>
+        </section>
+
+        <section>
+          <h2>Make sure it's <i>really</i> installed</h2>
+          <ol>
+            <li>Enter: <code class='il'>$ node -v</code> should output a version number (ie <code class='il'>v5.9.0</code>)</li>
+            <li>Enter: <code class='il'>$ npm -v</code> should output a version number (ie <code class='il'>3.9.3</code>)</li>
+          </ol>
+        </section>
+
+        <section>
+          <h1>2. Create a new project</h1>
+          <p>(all done in <code class="il">console</code>)</p>
+        </section>
+
+        <section>
+          <p><code class="il">cd</code> to your favorite directory</p>
+          <p>eg <code class="il">$ cd ~/Users/kennedy/Sites</code></p>
+        </section>
+
+        <section>
+          <p>Create a new folder for your project</p>
+          <p><code class="il">$ mkdir learning-build-tools</code></p>
+        </section>
+
+        <section>
+          <h3>Open your new project</h3>
+          <p>in your favorite code editor</p>
+          <p>Observe how empty it is...</p>
+        </section>
+
+        <section>
+          <p>Back to <code class="il">console</code>... Go in to your new folder...</p>
+          <p><code class="il">$ cd learning-build-tools</code></p>
+        </section>
+
+        <section>
+          <h3>Create a new node.js project</h3>
+          <p><code class="il">$ npm init</code></p>
+          <aside class="notes">
+            <p>what does this do?</p>
+            <p>creates a new packages.json file</p>
+            <p>explain what this is, why it's important</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Follow the prompts and answer the questions.</h3>
+          <p>If you don't know the answer, just press <code class="il">enter</code> to continue, you can't hurt anything.</p>
+        </section>
+
+        <section>
+          <h3>You should have a <code class="il">package.json</code> file now</h3>
+          <p><code class="il">$ ls</code> in <code class="il">console</code> to see your new file</p>
+          <p>Open it in your editor to see the fruits of your labor</p>
+          <aside class="notes">
+            <p>explain what happened and why</p>
+            <p>explain how node uses this</p>
+          </aside>
+        </section>
+
+        <section>
+          <h2>3. Install <code class="il">gulp</code></h2>
+          <p>(in your <code class="il">console</code>)</p>
+        </section>
+
+        <section>
+          <p><code class="il">$ npm install gulp --save-dev</code></p>
+          <aside class="notes">
+            <p>who can tell me what's happening?</p>
+            <p>goes out to node, gets gulp, saves as a development dependency</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>What's that <code class="il">--save-dev</code>?</h3>
+          <p>Saves the package as a <b>Development-only</b> dependency.</p>
+          <aside class="notes">
+            <p>difference between --save and --save-dev</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Look at <code class="il">package.json</code> now</h3>
+          <p>See the new dependency node added?</p>
+        </section>
+
+        <section>
+          <h3>Look at your file structure now</h3>
+          <p><code class="il">$ ls</code></p>
+          <p>See a new folder, <code class="il">node_modules</code>?</p>
+        </section>
+
+        <section>
+          <h2>If using Git,</h2>
+          <p>Always <code class="il">gitignore</code> <code class="il">node_modules</code> folder</p>
+        </section>
+
+        <section>
+          <h3>Make sure you <i>Really</i> installed <code class="il">gulp</code></h3>
+          <p>(in console):<code class='il'>$ gulp -v</code> should tell us the version</p>
+        </section>
+
+        <section>
+          <h2>5. Create a <code class="il">gulpfile.js</code></h2>
+          <p>(From your code editor)</p>
+        </section>
+
+        <section>
+          <p>In the root of your project folder, create a file called <code class="il">gulpfile.js</code></p>
+        </section>
+
+        <section>
+          <h3>gulpfile.js:</h3>
+          <pre><code>
+const gulp = require('gulp')
+
+gulp.task('default', () => {
+  console.log('Hello World!')
+})
+          </code></pre>
+          <aside class="notes">
+            <p>what do you notice about gulp?</p>
+            <p>answer: es6 compliant</p>
+          </aside>
+        </section>
+
+        <section>
+          <p>Test your new gulp task</p>
+          <p><code class="il">$ gulp</code></p>
+          <p>Should output <b>Hello World!</b></p>
+        </section>
+
+        <section>
+          <h2>5. Create project folders</h2>
+        </section>
+
+        <section>
+          <h3>Create 2 folders at site root:</h3>
+          <ul>
+            <li><code class="il">app/</code> - where code you write goes</li>
+            <li><code class="il">dist/</code> - where compiled code goes</li>
+          </ul>
+          <aside class="notes">
+            <p>never compile code into your app directory</p>
+            <p>never write code in your dist directory</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>If you use Git...</h3>
+          <p>Always <code class="il">gitignore</code> the <code class="il">dist/</code> folder</p>
+        </section>
+
+        <!-- <section>
+          <h3>If you feel fancy..</h3>
+          <p>todo: Create an "init" step to create these for you</p>
+        </section> -->
+
+<!-- actually build your project to the dist directory -->
+        <section>
+          <h2>6. Build Your Project</h2>
+          <p>(in <code class="il">gulpfile.js</code>)</p>
+        </section>
+
+        <section>
+          <h3>Add a new task:</h3>
+          <pre><code>
+gulp.task('build', () => {
+  return gulp
+    .src('app/**/*')
+    .pipe(gulp.dest('dist/'));
+})
+          </code></pre>
+          <aside class="notes">
+            <p>src - where to look (file glob)</p>
+            <p>dest - where to build (specific folder, follows same pattern as src unless otherwise specified)</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Make sure it's really copying!</h3>
+          <p>Create file <code class="il">app/test.css</code></p>
+          <pre><code>
+.test {
+  display: flex;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Now in <code class="il">console</code>: </h3>
+          <p><code class="il">$ gulp build</code></p>
+          <p>Should see gulp running a build</p>
+        </section>
+
+        <section>
+          <h3>Check your <code class="il">dist/</code> folder</h3>
+          <p>Do you see your <code class="il">test.css</code> file?</p>
+        </section>
+
+<!-- adding a watch -->
+        <section>
+          <h2>7. Watch your code</h2>
+          <p>Because running <code class="il">$ gulp build</code> every time is a pain</p>
+        </section>
+
+        <section>
+          <h3>Add a new task:</h3>
+          <pre><code>
+gulp.task('watch', () => {
+  gulp.watch(`app/**/*`, ['build']);
+})
+          </code></pre>
+          <aside class="notes">
+            <p>where to watch (glob)</p>
+            <p>what task to run when a change happens</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Make sure it's really watching</h3>
+          <p>Run <code class="il">$ gulp watch</code></p>
+          <p>Notice the task doesn't finish</p>
+        </section>
+
+        <section>
+          <p>Open file <code class="il">app/test.css</code>, and change a line:</p>
+          <pre><code>
+.test {
+  color: red;
+  display: flex;
+}
+          </code></pre>
+          <p><code class="il">Save</code> the file.</p>
+        </section>
+
+        <section>
+          <h3>Look at your <code class="il">console</code></h3>
+          <p>Did it automatically run <code class="il">gulp build</code>?</p>
+        </section>
+
+        <section>
+          <h3>Look at <code class="il">dist/test.css</code></h3>
+          <p>It should update whenever you save <code class="il">app/test.css</code></p>
+        </section>
+
+<!-- add autoprefixer -->
+        <section>
+          <h2>8. Autoprefix your CSS</h2>
+          <aside class="notes">
+            because this is a lame build process without magic
+          </aside>
+        </section>
+
+        <section>
+          <h3>In <code class="il">console</code>, install <code class="il">autoprefixer</code></h3>
+          <p><code class="il">npm install gulp-autoprefixer --save-dev</code></p>
+        </section>
+
+        <section>
+          <h3>In <code class="il">gulpfile.js</code>,</h3>
+          <p>add <code class='il'>autoprefixer</code> package at the top:</p>
+          <pre><code>
+const gulp = require('gulp')
+const autoprefixer  = require('gulp-autoprefixer')
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>In <code class="il">gulpfile.js</code>,</h3>
+          <p>update <code class='il'>build</code> to include <code class="il">autoprefixer</code></p>
+          <pre><code>
+gulp.task('build', () => {
+  return gulp
+    .src('app/**/*')
+    .pipe(autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))
+    .pipe(gulp.dest('dist/'));
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Make sure it's autoprefixing!</h3>
+          <p>Run <code class="il">$ gulp build</code></p>
+          <p>Check <code class="il">dist/test.css</code></p>
+          <p>You should see something like:</p>
+          <pre><code>
+.test {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: red;
+}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>9. Subtasks</h2>
+          <aside class="notes">
+            <p>why is this build awful?</p>
+            <p>answer: because it only builds css... anything else will break it.</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Break Tasks down by file type</h3>
+          <p>a <code class="il">:</code> denotes a subtask</p>
+        </section>
+
+        <section>
+          <h3>Make <code class="il">CSS</code> have Subtasks</h3>
+          <p>In <code class="il">gulpfile.js</code>, make our tasks specific to <code class="il">CSS</code></p>
+          <pre><code data-noescape class="js">
+// css
+gulp.task('<mark>css:</mark>build', () => {
+  return gulp
+    .src('app/**/*<mark>.css</mark>')
+    .pipe(autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))
+    .pipe(gulp.dest('dist/'));
+})
+
+gulp.task('<mark>css:</mark>watch', () => {
+  gulp.watch(`app/**/*<mark>.css</mark>`, ['build']);
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Make <code class="il">HTML</code> Tasks</h3>
+          <p>In <code class="il">gulpfile.js</code>, copy the <code class="il">CSS</code> tasks, and use for <code class="il">HTML</code></p>
+          <pre><code data-noescape class="js">
+// html
+gulp.task('html:build', () => {
+  return gulp
+    .src('app/**/*.html')
+    .pipe(gulp.dest('dist/'));
+})
+
+gulp.task('html:watch', () => {
+  gulp.watch(`app/**/*.html`, ['build']);
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Make <code class="il">JS</code> Tasks</h3>
+          <p>In <code class="il">gulpfile.js</code>, copy the <code class="il">HTML</code> tasks, and use for <code class="il">JS</code></p>
+          <pre><code data-noescape class="js">
+// js
+gulp.task('js:build', () => {
+  return gulp
+    .src('app/**/*.js')
+    .pipe(gulp.dest('dist/'));
+})
+
+gulp.task('js:watch', () => {
+  gulp.watch(`app/**/*.js`, ['build']);
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Test your changes</h3>
+          <p>add <code class="il">app/test.js</code>, <code class="il">app/test.html</code> to your site.</p>
+          <p>Empty your <code class="il">dist/</code> directory</p>
+        </section>
+        <section>
+          <h3>Run a task to see it build</h3>
+          <p>It should only build the thing specified</p>
+          <pre><code class="bash">
+$ gulp css:build
+$ gulp css:watch
+$ gulp js:build
+$ gulp js:watch
+$ gulp html:build
+$ gulp html:watch
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>10. Concurrent Tasks</h2>
+          <aside class="notes">
+            <p>combine similar tasks so they can run together</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Make one <code class="il">build</code> and <code class="il">watch</code> Task</h3>
+          <p>in <code class="il">gulpfile.js</code>:</p>
+          <pre><code class="js">
+gulp.task('build', ['css:build', 'js:build', 'html:build'])
+gulp.task('watch', ['css:watch', 'js:watch', 'html:watch'])
+          </code></pre>
+          <aside class="notes">
+            <p>the 2nd argument means these tasks can be run concurrently, not sequentially.</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Test your changes</h3>
+          <p><code class="il">$ gulp build</code></p>
+          <p>Should run all builds separately</p>
+        </section>
+
+        <section>
+          <h2>11. Clean your build</h2>
+        </section>
+
+        <section>
+          <h3>Install <code class="il">del</code> package</h3>
+          <p><code class="il">$ npm install del --save-dev</code></p>
+        </section>
+        <section>
+          <h3>Import <code class="il">del</code></h3>
+          <pre><code class="js" data-noescape>
+..
+const autoprefixer  = require('gulp-autoprefixer')
+<mark>const del  = require('del')</mark>
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Create <code>:clean</code> tasks</h3>
+          <p>For each: <code class="il">css:clean</code>, <code class="il">js:clean</code>, <code class="il">html:clean</code></p>
+          <pre><code class="js" data-noescape>
+gulp.task('<mark>FILETYPE</mark>:clean', () => {
+  del([ `dist/**/*.<mark>FILETYPE</mark>`]);
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Create a parent <code class="il">clean</code> task</h3>
+          <pre><code class="js" data-noescape>
+gulp.task('clean', ['css:clean', 'js:clean', 'html:clean'])
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Test your changes!</h3>
+          <p><code class="il">$ gulp clean</code></p>
+          <p>Should remove all the files from your <code class="il">dist</code> directory</p>
+        </section>
+
+        <section>
+          <h3>Development task running is now:</h3>
+          <p><code class="il">$ gulp clean; gulp watch</code></p>
+        </section>
+
+<!-- add in variables for --production -->
+        <section>
+          <h2>12. Variables</h2>
+          <aside class="notes">
+            because it's helpful to have optional parts of your build
+            (--production, --skip-lint, --verbose-testing, etc)
+          </aside>
+        </section>
+
+        <section>
+          <h3>Install <code class="il">minimist</code></h3>
+          <p><code class="il">$ npm install minimist --save-dev</code></p>
+        </section>
+
+        <section>
+          <h3>Add a <code class="il">--production</code> option</h3>
+          <p>Near top of <code class="il">gulpfile.js</code>:</p>
+          <pre><code class="js">
+const minimist  = require('minimist')
+const options = minimist(process.argv.slice(2), {
+  default: {
+    production: false
+  }
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Test your code</h3>
+          <p>In <code class="il">gulpfile.js</code>:</p>
+          <pre><code class="js">
+console.log('is production?', options.production);
+          </code></pre>
+          <p>Now, run <code class="il">$ gulp build --production</code></p>
+          <p>Console should log <code class='il'>true</code></p>
+        </section>
+
+        <section>
+          <h2>13. Use your <code class="il">production</code> flag</h2>
+          <p>to only minify code for production builds</p>
+        </section>
+
+        <section>
+          <h3>Install <code class="il">gulp-uglify</code> and <code class="il">gulp-util</code></h3>
+          <p><code class="il">$ npm install gulp-uglify --save-dev</code></p>
+          <p><code class="il">$ npm install gulp-util --save-dev</code></p>
+        </section>
+
+        <section>
+          <h3>Add them as requirements</h3>
+          <p>Near top of <code class="il">gulpfile.js</code></p>
+          <pre><code class="js">
+const gutil = require('gulp-util')
+const uglify = require('gulp-uglify')
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Add to your JS Build</h3>
+          <pre><code class="js" data-noescape>
+gulp.task('js:build', () => {
+  return gulp
+    .src('app/**/*.js')
+    <mark>.pipe(options.production ? uglify() : gutil.noop())</mark>
+    .pipe(gulp.dest('dist/'));
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Test it!</h3>
+          <p><code class="il">$ gulp build --production</code></p>
+          <p><code class="il">dist/test.js</code> should be minified</p>
+          <hr>
+          <p><code class="il">$ gulp build</code></p>
+          <p><code class="il">dist/test.js</code> should be expanded</p>
+          <aside class="notes">
+            <p>This is awesome, because it means we don't have to waste time doing lame things we don't need when watching for changes</p>
+          </aside>
+        </section>
+
+        <section>
+          <h1>Those are the basics!</h1>
+        </section>
+
+        <section>
+          <h3>More things to add:</h3>
+          <ul>
+          <li><code class="il">run-sequence</code> - sequentially run tasks</li>
+            <li><code class="il">concat</code> - combine files into one</li>
+            <li><code class="il">sourcemaps</code> - create sourcemaps for js/css files</li>
+            <li><code class="il">precompilers</code> - sass/stylus/less integration</li>
+            <li><code class="il">js compilers</code> - es6 support</li>
+            <li><code class="il">connect</code> - local server w/live reload</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Questions?</h1>
+          <p>Twitter/Github:</p>
+          <p>@mistersender</p>
+        </section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

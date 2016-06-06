@@ -1,0 +1,19 @@
+{
+  "name": "test-gulp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jessica Kennedy <jessica.kennedy@inmar.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "minimist": "^1.2.0"
+  }
+}
