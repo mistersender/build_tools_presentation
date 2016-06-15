@@ -40,6 +40,14 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+
+        <section>
+          <p>This slide intentionally left blank.</p>
+          <aside class="notes">
+            turn off hot corners!<br>
+          </aside>
+        </section>
+
 				<section>
 				  <h1>Intro to Build Tools</h1>
           <h4>with Jessica Kennedy</h4>
@@ -188,7 +196,7 @@
         </section>
 
         <section>
-          <h2><code class="il">ls</code></h2>
+          <h2><code class="il">ls</code> (mac) <code class="il">dir</code> (windows)</h2>
           <p>list the things in the current folder</p>
         </section>
 
@@ -228,7 +236,7 @@
 
         <section>
           <h1>2. Create a new project</h1>
-          <p>(all done in <code class="il">console</code>)</p>
+          <p>(with <code class="il">console</code>)</p>
         </section>
 
         <section>
@@ -283,7 +291,7 @@
         </section>
 
         <section>
-          <p><code class="il">$ npm install gulp --save-dev</code></p>
+          <p><code class="il">$ npm install gulp --save-dev --global</code></p>
           <aside class="notes">
             <p>who can tell me what's happening?</p>
             <p>goes out to node, gets gulp, saves as a development dependency</p>
@@ -378,11 +386,10 @@ gulp.task('default', () => {
 <!-- actually build your project to the dist directory -->
         <section>
           <h2>6. Build Your Project</h2>
-          <p>(in <code class="il">gulpfile.js</code>)</p>
         </section>
 
         <section>
-          <h3>Add a new task:</h3>
+          <h3>Add a new task in <code class="il">gulpfile.js</code>:</h3>
           <pre><code>
 gulp.task('build', () => {
   return gulp
@@ -424,7 +431,7 @@ gulp.task('build', () => {
         </section>
 
         <section>
-          <h3>Add a new task:</h3>
+          <h3>Add a new task <code class="il">gulpfile.js</code>:</h3>
           <pre><code>
 gulp.task('watch', () => {
   gulp.watch(`app/**/*`, ['build']);
@@ -444,9 +451,9 @@ gulp.task('watch', () => {
 
         <section>
           <p>Open file <code class="il">app/test.css</code>, and change a line:</p>
-          <pre><code>
+          <pre><code class="css" data-noescape >
 .test {
-  color: red;
+  <mark>color: red;</mark>
   display: flex;
 }
           </code></pre>
@@ -461,6 +468,11 @@ gulp.task('watch', () => {
         <section>
           <h3>Look at <code class="il">dist/test.css</code></h3>
           <p>It should update whenever you save <code class="il">app/test.css</code></p>
+        </section>
+
+        <section>
+          <h3>End your <code class="il">watch</code></h3>
+          <p>In <code class="il">console</code>, <code class="il">ctrl + c</code></p>
         </section>
 
 <!-- add autoprefixer -->
@@ -479,20 +491,20 @@ gulp.task('watch', () => {
         <section>
           <h3>In <code class="il">gulpfile.js</code>,</h3>
           <p>add <code class='il'>autoprefixer</code> package at the top:</p>
-          <pre><code>
+          <pre><code data-noescape class="js">
 const gulp = require('gulp')
-const autoprefixer  = require('gulp-autoprefixer')
+<mark class="add">const autoprefixer = require('gulp-autoprefixer')</mark>
           </code></pre>
         </section>
 
         <section>
           <h3>In <code class="il">gulpfile.js</code>,</h3>
           <p>update <code class='il'>build</code> to include <code class="il">autoprefixer</code></p>
-          <pre><code>
+          <pre><code data-noescape class="js">
 gulp.task('build', () => {
   return gulp
     .src('app/**/*')
-    .pipe(autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))
+    <mark class="add">.pipe(autoprefixer({ browsers: ['last 2 versions', '> 5%'] }))</mark>
     .pipe(gulp.dest('dist/'));
 })
           </code></pre>
@@ -539,7 +551,7 @@ gulp.task('<mark>css:</mark>build', () => {
 })
 
 gulp.task('<mark>css:</mark>watch', () => {
-  gulp.watch(`app/**/*<mark>.css</mark>`, ['build']);
+  gulp.watch(`app/**/*<mark>.css</mark>`, ['css:build']);
 })
           </code></pre>
         </section>
@@ -556,7 +568,7 @@ gulp.task('html:build', () => {
 })
 
 gulp.task('html:watch', () => {
-  gulp.watch(`app/**/*.html`, ['build']);
+  gulp.watch(`app/**/*.html`, ['html:build']);
 })
           </code></pre>
         </section>
@@ -573,9 +585,10 @@ gulp.task('js:build', () => {
 })
 
 gulp.task('js:watch', () => {
-  gulp.watch(`app/**/*.js`, ['build']);
+  gulp.watch(`app/**/*.js`, ['js:build']);
 })
           </code></pre>
+          <!-- @todo: go back and "mark" all the the adds we do to the file -->
         </section>
 
         <section>
@@ -634,7 +647,7 @@ gulp.task('watch', ['css:watch', 'js:watch', 'html:watch'])
           <pre><code class="js" data-noescape>
 ..
 const autoprefixer  = require('gulp-autoprefixer')
-<mark>const del  = require('del')</mark>
+<mark class="add">const del  = require('del')</mark>
           </code></pre>
         </section>
 
@@ -729,7 +742,7 @@ const uglify = require('gulp-uglify')
 gulp.task('js:build', () => {
   return gulp
     .src('app/**/*.js')
-    <mark>.pipe(options.production ? uglify() : gutil.noop())</mark>
+    <mark class="add">.pipe(options.production ? uglify() : gutil.noop())</mark>
     .pipe(gulp.dest('dist/'));
 })
           </code></pre>
@@ -748,18 +761,122 @@ gulp.task('js:build', () => {
         </section>
 
         <section>
-          <h1>Those are the basics!</h1>
+          <h1>Add a Local Server</h1>
+        </section>
+
+        <section>
+          <h3>Hook your 3 files together</h3>
+          <p>In <code class="il">app/test.html</code></p>
+          <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="test.css"&gt;
+    &lt;script src="test.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1 class="test"&gt;hello world!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Install Connect & Run-Sequence</h3>
+          <p><code class="il">$ npm i run-sequence gulp-connect -D</code></p>
+          <p><small>Yes, I have been holding out on you.</small></p>
+        </section>
+
+        <section>
+          <h3>Add them to your <code class='il'>gulpfile.js</code></h3>
+          <pre><code class="js" data-noescape>
+const uglify = require('gulp-uglify')
+<mark class="add">const connect = require('gulp-connect')</mark>
+<mark class="add">const runSequence = require('run-sequence')</mark>
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Add a new task to <code class="il">gulpfile.js</code></h3>
+          <pre><code class='js'>
+gulp.task('serve', () => {
+  connect.server()
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Test your new server</h3>
+          <ol>
+            <li>Run <code class="il">$ gulp serve</code></li>
+            <li>Go to <code class="il">http://localhost:8080/dist/test.html</code> in browser</li>
+            <li>See your beautiful site!</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Add serve to the watch task</h2>
+        </section>
+
+        <section>
+          <h3>Update the <code class="il">serve</code> task</h3>
+          <pre><code data-noescape class="js">
+gulp.task('serve', () => {
+  connect.server(<mark>{</mark>
+    <mark class="add">livereload: true</mark>
+  <mark>}</mark>)
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Update your <code class="il">:build</code> tasks</h3>
+          <p>Add a <code class="il">.pipe()</code> to the last line of each build, like so:</p>
+          <pre><code data-noescape class="js">
+gulp.task('TASKNAME:build', () => {
+  return gulp
+    .src('app/**/*.TASKNAME')
+    .pipe(gulp.dest('dist/'))
+    <mark class="add">.pipe(connect.reload());</mark>
+})
+          </code></pre>
+        </section>
+
+        <section>
+          <h3>Update the <code class="il">watch</code> task</h3>
+          <pre><code class="js" data-noescape>
+gulp.task('watch', <mark>function(cb){</mark>
+<mark class="add">  return runSequence(</mark>
+<mark class="add">    'serve',</mark>
+<mark class="add">    ['css:watch', 'js:watch', 'html:watch']</mark>
+<mark class="add">  )</mark>
+<mark>}</mark>)
+          </code></pre>
+          <aside class="notes">
+            "callback" allows it to return correctly
+          </aside>
+        </section>
+
+        <section>
+          <h3>Test your watch</h3>
+          <ol>
+            <li><code class="il">$ gulp watch</code></li>
+            <li>Go to <code class="il">http://localhost:8080/dist/test.html</code> in browser</li>
+            <li>Change a file in <code class="il">app/</code></li>
+            <li>Watch it magically reload!</li>
+          </ol>
+        </section>
+
+        <section>
+          <h1>You did it!!</h1>
         </section>
 
         <section>
           <h3>More things to add:</h3>
           <ul>
-          <li><code class="il">run-sequence</code> - sequentially run tasks</li>
             <li><code class="il">concat</code> - combine files into one</li>
             <li><code class="il">sourcemaps</code> - create sourcemaps for js/css files</li>
             <li><code class="il">precompilers</code> - sass/stylus/less integration</li>
             <li><code class="il">js compilers</code> - es6 support</li>
-            <li><code class="il">connect</code> - local server w/live reload</li>
           </ul>
         </section>
 
@@ -767,6 +884,20 @@ gulp.task('js:build', () => {
           <h1>Questions?</h1>
           <p>Twitter/Github:</p>
           <p>@mistersender</p>
+        </section>
+
+        <section class="inmar">
+          <div class="c-grid">
+            <div>
+              <img src="images/inmar/logo.png" alt="inmar">
+              <h4>Intelligent Commerce</h4>
+              <p>Billions transactions and shopper engagements flow through our systems. For over 35 years, Inmar has been the leader in North America for managing promotional dollars, loyalty and shopper engagement; logistics and supply chain; and healthcare and pharmaceuticals.</p>
+              <p>We employ the best engineers across North America and the world to work on rich web and mobile applications, big data and real-time analytics, embedded and RF logistics for supply chain and warehouses, and more. If you think you have what it takes, apply to join the team!</p>
+            </div>
+            <div>
+              <!-- intentionally blank for bg to appear-->
+            </div>
+          </div>
         </section>
 			</div>
 

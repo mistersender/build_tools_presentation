@@ -32,3 +32,55 @@ code.il {
   border-radius: 2px;
   padding: 0 .1em;
 }
+
+mark{
+  background: rgba(255, 255, 25, .2);
+  color: inherit;
+}
+
+mark.add:before, mark.add:after {
+    content: "Add \2192";
+    background: yellow;
+    color: black;
+    margin-left: 5px;
+    position: absolute;
+    left: -68px;
+    border: 1px solid black;
+    padding: 0 2px;
+}
+
+/*mark.add:after {
+    content: "\2190 Add";
+    margin-left: 5px;
+    position: static;
+}*/
+
+
+.inmar.slide-background:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100vh;
+  width: 50vw;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  background: url(../images/inmar/headquarters.png);
+  background-size: cover;
+}
+.inmar.present {
+  font-size: .5em
+}
+.inmar h4 {
+  font-size: 2em;
+}
+.inmar img{
+  box-shadow: none!important;
+  border: none!important;
+  margin: 0!important;
+}
+.inmar .c-grid > *:first-child {
+  padding-right: 2em;
+  position: relative;
+  right: 3em;
+}
