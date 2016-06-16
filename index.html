@@ -433,12 +433,13 @@ gulp.task('build', () => {
         <section>
           <h3>Add a new task <code class="il">gulpfile.js</code>:</h3>
           <pre><code>
-gulp.task('watch', () => {
+gulp.task('watch', ['build'], () => {
   gulp.watch(`app/**/*`, ['build']);
 })
           </code></pre>
           <aside class="notes">
             <p>where to watch (glob)</p>
+            <p>What to run first</p>
             <p>what task to run when a change happens</p>
           </aside>
         </section>
@@ -550,8 +551,8 @@ gulp.task('<mark>css:</mark>build', () => {
     .pipe(gulp.dest('dist/'));
 })
 
-gulp.task('<mark>css:</mark>watch', () => {
-  gulp.watch(`app/**/*<mark>.css</mark>`, ['css:build']);
+gulp.task('<mark>css:</mark>watch', ['<mark>css:</mark>build']() => {
+  gulp.watch(`app/**/*<mark>.css</mark>`, ['<mark>css:</mark>build']);
 })
           </code></pre>
         </section>
@@ -567,7 +568,7 @@ gulp.task('html:build', () => {
     .pipe(gulp.dest('dist/'));
 })
 
-gulp.task('html:watch', () => {
+gulp.task('html:watch', ['html:build'], () => {
   gulp.watch(`app/**/*.html`, ['html:build']);
 })
           </code></pre>
@@ -584,7 +585,7 @@ gulp.task('js:build', () => {
     .pipe(gulp.dest('dist/'));
 })
 
-gulp.task('js:watch', () => {
+gulp.task('js:watch', ['js:build'], () => {
   gulp.watch(`app/**/*.js`, ['js:build']);
 })
           </code></pre>
@@ -652,7 +653,7 @@ const autoprefixer  = require('gulp-autoprefixer')
         </section>
 
         <section>
-          <h3>Create <code>:clean</code> tasks</h3>
+          <h3>Create <code class="il">:clean</code> tasks</h3>
           <p>For each: <code class="il">css:clean</code>, <code class="il">js:clean</code>, <code class="il">html:clean</code></p>
           <pre><code class="js" data-noescape>
 gulp.task('<mark>FILETYPE</mark>:clean', () => {
@@ -880,12 +881,6 @@ gulp.task('watch', <mark>function(cb){</mark>
           </ul>
         </section>
 
-        <section>
-          <h1>Questions?</h1>
-          <p>Twitter/Github:</p>
-          <p>@mistersender</p>
-        </section>
-
         <section class="inmar">
           <div class="c-grid">
             <div>
@@ -898,6 +893,12 @@ gulp.task('watch', <mark>function(cb){</mark>
               <!-- intentionally blank for bg to appear-->
             </div>
           </div>
+        </section>
+
+        <section>
+          <h1>Questions?</h1>
+          <p>Twitter/Github:</p>
+          <p>@mistersender</p>
         </section>
 			</div>
 

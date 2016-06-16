@@ -38,7 +38,7 @@ gulp.task('css:build', () => {
     .pipe(connect.reload());
 })
 
-gulp.task('css:watch', () => {
+gulp.task('css:watch', ['css:build'], () => {
   gulp.watch(`app/**/*.css`, ['css:build']);
 })
 
@@ -55,7 +55,7 @@ gulp.task('js:build', () => {
     .pipe(connect.reload());
 })
 
-gulp.task('js:watch', () => {
+gulp.task('js:watch', ['js:build'], () => {
   gulp.watch(`app/**/*.js`, ['js:build']);
 })
 
@@ -67,7 +67,7 @@ gulp.task('html:build', () => {
     .pipe(connect.reload());
 })
 
-gulp.task('html:watch', () => {
+gulp.task('html:watch', ['html:build'], () => {
   gulp.watch(`app/**/*.html`, ['html:build']);
 })
 
