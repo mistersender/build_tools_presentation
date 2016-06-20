@@ -45,7 +45,8 @@
           <p>This slide intentionally left blank.</p>
           <aside class="notes">
             turn off hot corners!<br>
-            set do not disturb!
+            set do not disturb!<br>
+            todo: figure out what version of node they have to have to do this
           </aside>
         </section>
 
@@ -293,9 +294,12 @@
         </section>
 
         <section>
-          <p><code class="il">$ npm install gulp --save-dev --global</code></p>
+          <p>Install CLI: <code class="il">$ npm install gulp --global</code></p><!-- @todo: might need --save-dev, but that seems dumb -->
+          <p>Install to Project: <code class="il">$ npm install gulp --save-dev</code></p>
           <aside class="notes">
             <p>who can tell me what's happening?</p>
+            <p>first one installs the CLI so we can run from command prompt</p>
+            <p>The second installs into our actual project</p>
             <p>goes out to node, gets gulp, saves as a development dependency</p>
           </aside>
         </section>
@@ -377,7 +381,11 @@ gulp.task('default', () => {
 
         <section>
           <h3>If you use Git...</h3>
-          <p>Always <code class="il">gitignore</code> the <code class="il">dist/</code> folder</p>
+          <p>Consider <code class="il">gitignore</code> the <code class="il">dist/</code> folder</p>
+          <aside class="notes">
+            if your process builds it, should not be necessary in repo, <br>
+            but may be a tool or includeable file that snoudl be built, so it depends on the thing you're working on
+          </aside>
         </section>
 
         <!-- <section>
@@ -591,7 +599,6 @@ gulp.task('js:watch', ['js:build'], () => {
   gulp.watch(`app/**/*.js`, ['js:build']);
 })
           </code></pre>
-          <!-- @todo: go back and "mark" all the the adds we do to the file -->
         </section>
 
         <section>
@@ -659,9 +666,10 @@ const autoprefixer  = require('gulp-autoprefixer')
           <p>For each: <code class="il">css:clean</code>, <code class="il">js:clean</code>, <code class="il">html:clean</code></p>
           <pre><code class="js" data-noescape>
 gulp.task('<mark>FILETYPE</mark>:clean', () => {
-  del([ `dist/**/*.<mark>FILETYPE</mark>`]);
+  return del([ `dist/**/*.<mark>FILETYPE</mark>`]);
 })
           </code></pre>
+          <!-- not sure 'return' is necessary, check and see, might be a callback or something -->
         </section>
 
         <section>
@@ -802,9 +810,10 @@ const uglify = require('gulp-uglify')
           <h3>Add a new task to <code class="il">gulpfile.js</code></h3>
           <pre><code class='js'>
 gulp.task('serve', () => {
-  connect.server()
+  return connect.server()
 })
           </code></pre>
+          <!-- todo: see if we actually need return, might be a callback or something -->
         </section>
 
         <section>
@@ -817,14 +826,14 @@ gulp.task('serve', () => {
         </section>
 
         <section>
-          <h2>Add serve to the watch task</h2>
+          <h2>Auto-Reload Your Changes</h2>
         </section>
 
         <section>
           <h3>Update the <code class="il">serve</code> task</h3>
           <pre><code data-noescape class="js">
 gulp.task('serve', () => {
-  connect.server(<mark>{</mark>
+  return connect.server(<mark>{</mark>
     <mark class="add">livereload: true</mark>
   <mark>}</mark>)
 })
@@ -881,13 +890,9 @@ gulp.task('watch', <mark>function(cb){</mark>
             <li><code class="il">precompilers</code> - sass/stylus/less integration</li>
             <li><code class="il">js compilers</code> - es6 support</li>
           </ul>
-        </section>
-
-        <section>
-          <h3>Want to know more?</h3>
-          <h2>Automated Hybrid Application Development And Release</h2>
-          <p>Tomorrow with Trevor Brindle</p>
-
+          <aside class="notes">
+            see who can add sass support first. (that's an easy win)
+          </aside>
         </section>
 
         <section class="inmar">
